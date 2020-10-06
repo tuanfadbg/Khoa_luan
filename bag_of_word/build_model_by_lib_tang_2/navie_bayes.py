@@ -1,57 +1,101 @@
 import csv
-import pickle
-import random
 import time
 
 import numpy as np
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.metrics import classification_report
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.multiclass import OneVsRestClassifier
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
 
 from bag_of_word.split_word import SplitWord
 
-start_time = time.time()
-text_clf = Pipeline([('vect', CountVectorizer(ngram_range=(1, 1),
-                                              max_df=0.8,
-                                              max_features=None)),
-                     ('tfidf', TfidfTransformer()),
-                     ('clf', MultinomialNB())
-                     ])
+is_covid_position = 13
+title_position = 14
+des_position = title_position + 1
+content_position = des_position + 1
+category_position = content_position + 1
+keyword_position = category_position + 1
 
-r = csv.reader(open('../dictionary/data_without_segmentation.csv'))
+start_time = time.time()
+
+r = csv.reader(open('../data/combine/output.csv'))
 data_csv = list(r)
 
 loop_count = len(data_csv)
-# loop_count = 16000
+# loop_count = 2000
 data = []
-is_covid = np.empty([loop_count, ])
+categories = []
 
 sample_items = []
-if loop_count == len(data_csv):
-    sample_items = data_csv
-else:
-    sample_items = random.sample(data_csv, loop_count)
-
+# if loop_count == len(data_csv):
+sample_items = data_csv
+# else:
+#     sample_items = random.sample(data_csv, loop_count)
+# categories = np.empty([4, ])
 for i in range(loop_count):
-    data.append(SplitWord(sample_items[i][1]).segmentation())
-    # data.append(sample_items[i][1])
-    if sample_items[i][0]:
-        is_covid[i] = 0
-    else:
-        is_covid[i] = 1
+    if sample_items[i][is_covid_position] == '1':
+        str = sample_items[i][title_position] + " " \
+              + sample_items[i][des_position] + " " \
+              + sample_items[i][content_position] + " " \
+              + sample_items[i][category_position] + " " \
+              + sample_items[i][keyword_position]
+        data.append(SplitWord(str).segmentation())
+        category = []
+        if sample_items[i][0] == '1' or sample_items[i][1] == '1' or sample_items[i][2] == '1':
+            category.append(1)
+        else:
+            category.append(0)
 
-X_train, X_test, y_train, y_test = train_test_split(data, is_covid, test_size=0.1, random_state=42)
+        if sample_items[i][3] == '1':
+            category.append(1)
+        else:
+            category.append(0)
 
-text_clf = text_clf.fit(X_train, y_train)
+        if sample_items[i][4] == '1' or sample_items[i][5] == '1' or sample_items[i][6] == '1' \
+                or sample_items[i][7] == '1' or sample_items[i][8] == '1' or sample_items[i][9] == '1':
+            category.append(1)
+        else:
+            category.append(0)
 
-train_time = time.time() - start_time
-print('Done training Navie Bayes in', train_time, 'seconds.')
+        if sample_items[i][10] == '1' or sample_items[i][11] == '1' or sample_items[i][12] == '1':
+            category.append(1)
+        else:
+            category.append(0)
+        # print(category)
 
-print(text_clf.score(X_test, y_test))
-# Save model
-pickle.dump(text_clf, open("model/navie_bayes.pkl", 'wb'))
+        categories.append(category)
 
-y_pred = text_clf.predict(X_test)
-print(classification_report(y_test, y_pred))
+print(categories)
+X_train, X_test, y_train, y_test = train_test_split(data, categories, test_size=0.1, random_state=42)
+
+# NB_pipeline = Pipeline([
+#                 ('tfidf', TfidfVectorizer()),
+#                 ('clf', OneVsRestClassifier(MultinomialNB(
+#                     fit_prior=True, class_prior=None))),
+#             ])
+# y_train_np = np.array(y_train)
+# y_test_np = np.array(y_test)
+# # print(cate_np[:,3])
+# print('NavieBayes')
+# for i in range(4):
+#     print('... Processing {}'.format(i))
+#     # train the model using X_dtm & y
+#     NB_pipeline.fit(X_train, y_train_np[:,i])
+#     # compute the testing accuracy
+#     prediction = NB_pipeline.predict(X_test)
+#     print('Test accuracy is {}'.format(accuracy_score(y_test_np[:,i], prediction)))
+
+from skmultilearn.problem_transform import BinaryRelevance
+from sklearn.naive_bayes import GaussianNB
+
+classifier = BinaryRelevance(GaussianNB())
+# train
+classifier.fit(X_train, y_train)
+# predict
+predictions = classifier.predict(X_test)
+# accuracy
+print("Accuracy = ", accuracy_score(y_test, predictions))

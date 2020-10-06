@@ -1,0 +1,29 @@
+LogisticRegression
+Category 0
+Test accuracy is 0.9015384615384615
+Category 1
+Test accuracy is 0.9661538461538461
+Category 2
+Test accuracy is 0.8138461538461539
+Category 3
+Test accuracy is 0.7707692307692308
+
+SVM
+Category 0
+Test accuracy is 0.9123076923076923
+Category 1
+Test accuracy is 0.9692307692307692
+Category 2
+Test accuracy is 0.8184615384615385
+Category 3
+Test accuracy is 0.7876923076923077
+
+NavieBayes
+Category 0
+Test accuracy is 0.8215384615384616
+Category 1
+Test accuracy is 0.9615384615384616
+Category 2
+Test accuracy is 0.703076923076923
+Category 3
+Test accuracy is 0.7446153846153846

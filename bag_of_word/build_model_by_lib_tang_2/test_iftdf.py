@@ -48,7 +48,7 @@ df_idf = pd.DataFrame(tfidf_transformer.idf_, index=cv.get_feature_names(), colu
 # sort ascending
 df_idf.sort_values(by=['idf_weights'])
 
-print(df_idf)
+# print(df_idf)
 
 # count matrix
 count_vector = cv.transform(data)

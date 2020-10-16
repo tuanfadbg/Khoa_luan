@@ -26,3 +26,6 @@ class SplitWord(object):
     def get_words_feature(self):
         split_words = self.split_words()
         return [word for word in split_words if word not in self.stopwords]
+
+    def segmentation_remove_stop_word(self):
+        return ' '.join(self.get_words_feature())

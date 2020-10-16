@@ -26,7 +26,7 @@ r = csv.reader(open('../data/combine/output.csv'))
 data_csv = list(r)
 
 # loop_count = len(data_csv)
-loop_count = 100
+loop_count = 5000
 data = []
 is_covid = np.empty([loop_count, ])
 
@@ -43,7 +43,7 @@ for i in range(loop_count):
     else:
         is_covid[i] = 1
 # instantiate CountVectorizer()
-cv = CountVectorizer()
+cv = CountVectorizer(max_df=0.5)
 
 # this steps generates word counts for the words in your docs
 word_count_vector = cv.fit_transform(data)
@@ -53,13 +53,15 @@ print(word_count_vector.shape)
 tfidf_transformer = TfidfTransformer(smooth_idf=True, use_idf=True)
 tfidf_transformer.fit(word_count_vector)
 
+# print(tfidf_transformer.idf_)
 # print idf values
 df_idf = pd.DataFrame(tfidf_transformer.idf_, index=cv.get_feature_names(), columns=["idf_weights"])
 
 # sort ascending
 df_idf.sort_values(by=['idf_weights'])
-
-# print(df_idf)
+# pd.set_option("display.max_rows", None, "display.max_columns", None)
+#
+print(df_idf)
 
 # count matrix
 count_vector = cv.transform(data)
@@ -76,9 +78,9 @@ feature_names = cv.get_feature_names()
 
 # print(feature_names)
 
-# print(type(np.array(tf_idf_vector)))
-print(np.array(tf_idf_vector))
-
+# # print(type(np.array(tf_idf_vector)))
+# print(np.array(tf_idf_vector))
+#
 X_train, X_test, y_train, y_test = train_test_split(tf_idf_vector, is_covid, test_size=0.1, random_state=42)
 
 VOCAB_SIZE = len(feature_names)
@@ -93,8 +95,9 @@ print(model.summary())
 # model.compile(loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
 #               optimizer=tf.keras.optimizers.Adam(1e-4),
 #               metrics=['accuracy'])
-print(X_train)
-print(y_train)
+# print(type(X_train.toarray()))
+# print(X_train.toarray())
+# print(y_train)
 
 
 def convert_sparse_matrix_to_sparse_tensor(X):
@@ -108,13 +111,14 @@ model.compile(loss=tf.losses.BinaryCrossentropy(from_logits=True), optimizer='ad
 # print("print(convert_sparse_matrix_to_sparse_tensor(X_train))")
 # print()
 # print(convert_sparse_matrix_to_sparse_tensor(X_train))
+epochs = 10
 history = model.fit(
-    X_train,
-    np.array(y_train),
+    X_train.toarray(),
+    y_train,
     batch_size=64,
-    epochs=2)
+    epochs=epochs)
 
-y_pred = model.predict(X_test, y_test)
+y_pred = model.predict(X_test.toarray(), y_test)
 
 print(classification_report(y_test, y_pred))
 

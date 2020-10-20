@@ -1,0 +1,142 @@
+/Users/mac/PycharmProjects/Khoa_luan/venv/bin/python /Users/mac/PycharmProjects/Khoa_luan/bag_of_word/build_model_by_lib_tang_3/build_model.py
+LogisticRegression
+Category 0 0
+              precision    recall  f1-score   support
+
+           0       0.87      0.77      0.81       172
+           1       0.71      0.83      0.77       119
+
+    accuracy                           0.79       291
+   macro avg       0.79      0.80      0.79       291
+weighted avg       0.80      0.79      0.80       291
+
+Test accuracy is 0.7938144329896907
+Category 0 1
+              precision    recall  f1-score   support
+
+           0       0.65      0.96      0.77       160
+           1       0.87      0.36      0.51       131
+
+    accuracy                           0.69       291
+   macro avg       0.76      0.66      0.64       291
+weighted avg       0.75      0.69      0.65       291
+
+Test accuracy is 0.6872852233676976
+Category 0 2
+              precision    recall  f1-score   support
+
+           0       0.83      0.91      0.86       201
+           1       0.73      0.58      0.65        90
+
+    accuracy                           0.80       291
+   macro avg       0.78      0.74      0.76       291
+weighted avg       0.80      0.80      0.80       291
+
+Test accuracy is 0.8041237113402062
+LogisticRegression
+Category 2 0
+              precision    recall  f1-score   support
+
+           0       0.96      1.00      0.98       453
+           1       0.93      0.58      0.71        43
+
+    accuracy                           0.96       496
+   macro avg       0.94      0.79      0.85       496
+weighted avg       0.96      0.96      0.96       496
+
+Test accuracy is 0.9596774193548387
+Category 2 1
+              precision    recall  f1-score   support
+
+           0       0.93      0.98      0.95       387
+           1       0.91      0.73      0.81       109
+
+    accuracy                           0.93       496
+   macro avg       0.92      0.86      0.88       496
+weighted avg       0.92      0.93      0.92       496
+
+Test accuracy is 0.9254032258064516
+Category 2 2
+              precision    recall  f1-score   support
+
+           0       0.92      0.99      0.95       444
+           1       0.76      0.25      0.38        52
+
+    accuracy                           0.91       496
+   macro avg       0.84      0.62      0.67       496
+weighted avg       0.90      0.91      0.89       496
+
+Test accuracy is 0.9133064516129032
+Category 2 3
+              precision    recall  f1-score   support
+
+           0       0.90      0.99      0.94       409
+           1       0.89      0.47      0.62        87
+
+    accuracy                           0.90       496
+   macro avg       0.89      0.73      0.78       496
+weighted avg       0.90      0.90      0.88       496
+
+Test accuracy is 0.8971774193548387
+Category 2 4
+              precision    recall  f1-score   support
+
+           0       0.81      0.93      0.86       275
+           1       0.89      0.73      0.80       221
+
+    accuracy                           0.84       496
+   macro avg       0.85      0.83      0.83       496
+weighted avg       0.85      0.84      0.84       496
+
+Test accuracy is 0.8387096774193549
+Category 2 5
+/Users/mac/PycharmProjects/Khoa_luan/venv/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+           0       0.97      1.00      0.98       479
+           1       0.00      0.00      0.00        17
+
+    accuracy                           0.97       496
+   macro avg       0.48      0.50      0.49       496
+weighted avg       0.93      0.97      0.95       496
+
+Test accuracy is 0.9657258064516129
+LogisticRegression
+Category 3 0
+              precision    recall  f1-score   support
+
+           0       0.79      0.38      0.51       181
+           1       0.79      0.96      0.87       440
+
+    accuracy                           0.79       621
+   macro avg       0.79      0.67      0.69       621
+weighted avg       0.79      0.79      0.76       621
+
+Test accuracy is 0.7906602254428341
+Category 3 1
+              precision    recall  f1-score   support
+
+           0       0.78      0.99      0.87       472
+           1       0.80      0.13      0.23       149
+
+    accuracy                           0.78       621
+   macro avg       0.79      0.56      0.55       621
+weighted avg       0.79      0.78      0.72       621
+
+Test accuracy is 0.784219001610306
+Category 3 2
+/Users/mac/PycharmProjects/Khoa_luan/venv/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+           0       0.94      1.00      0.97       582
+           1       0.00      0.00      0.00        39
+
+    accuracy                           0.94       621
+   macro avg       0.47      0.50      0.48       621
+weighted avg       0.88      0.94      0.91       621
+
+Test accuracy is 0.9371980676328503
+
+Process finished with exit code 0

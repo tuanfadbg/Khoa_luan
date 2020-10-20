@@ -251,6 +251,7 @@ chắc lòng
 chắc người
 chắc vào
 chắc ăn
+chẳng
 chẳng lẽ
 chẳng những
 chẳng nữa
@@ -1257,6 +1258,7 @@ sử dụng
 sự
 sự thế
 sự việc
+ta
 tanh
 tanh tanh
 tay
@@ -2123,6 +2125,7 @@ dậy
 sóng
 gầm
 mặt
+mặc dù
 hồ
 kia
 bàn
